@@ -51,19 +51,8 @@ def get_cut_plane_image(z_height, idx):
     # 应用修改器
     bpy.context.view_layer.objects.active = cut_plane
     bpy.ops.object.modifier_apply(modifier=bool_mod.name)
-    
-    # 对复制的对象添加布尔修改器
-    bool_mod_2 = cut_plane.modifiers.new(type="BOOLEAN", name="Slice_2")
-    bool_mod_2.operation = 'INTERSECT'
-    bool_mod_2.object = original_obj
-    
-    # 应用修改器
-    bpy.context.view_layer.objects.active = cut_plane
-    bpy.ops.object.modifier_apply(modifier=bool_mod_2.name)
-
 
     original_obj.hide_render = True  # 在渲染时隐藏原始模型
-
     
     for area in bpy.context.screen.areas:
         if area.type == 'VIEW_3D':
